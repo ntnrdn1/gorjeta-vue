@@ -8,7 +8,7 @@
 
       <div>
         <label>% de Gorjeta</label>
-        <div id="porcentagem"><input v-model="porcentagem" /><span>%</span></div>
+        <div id="porcentagem"><input v-model.number="porcentagem" /><span>%</span></div>
         <small>O Valor padrão é 10%</small>
       </div>
 
@@ -20,12 +20,15 @@
 </template>
 
 <script lang="ts">
-export default {
+
+import { defineComponent } from 'vue';
+
+export default defineComponent({
   name: "App",
   data() {
     return {
       valorConta: 0,
-      porcentagem: 0,
+      porcentagem: 10,
       valorTotal: 0,
       gorjeta: 0,
     };
@@ -38,7 +41,7 @@ export default {
       this.valorTotal = gorjeta + valorConta;
     },
   },
-};
+});
 </script>
 
 <style scoped>
