@@ -1,18 +1,44 @@
 <template>
   <div id="container">
-    <strong>{{ name }}</strong>
-    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <form @submit.prevent="calcular">
+      <div>
+        <label>Valor da conta</label>
+      </div>
+      <input v-model.number="valorConta" />
+
+      <div>
+        <label>% de Gorjeta</label>
+        <div id="porcentagem"><input v-model="porcentagem" /><span>%</span></div>
+        <small>O Valor padrão é 10%</small>
+      </div>
+
+      <button type="submit">calcular</button>
+    </form>
+    <p>Valor da gorjeta: {{ gorjeta }}</p>
+    <p>Valor total: {{ valorTotal }}</p>
   </div>
 </template>
 
 <script lang="ts">
-
 export default {
-  name: 'ExploreContainer',
-  props: {
-    name: String
-  }
-}
+  name: "App",
+  data() {
+    return {
+      valorConta: 0,
+      porcentagem: 0,
+      valorTotal: 0,
+      gorjeta: 0,
+    };
+  },
+  methods: {
+    calcular() {
+      const { valorConta, porcentagem } = this;
+      this.gorjeta = (valorConta * porcentagem) / 100;
+      const { gorjeta } = this;
+      this.valorTotal = gorjeta + valorConta;
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -40,4 +66,13 @@ export default {
 #container a {
   text-decoration: none;
 }
+
+button {
+  margin: 1%;
+}
+
+#porcentagem {
+  margin-bottom: 5px;
+}
+
 </style>
